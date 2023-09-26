@@ -53,6 +53,11 @@ public class BookController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteBook(string id)
     {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            return BadRequest("ID is required");
+        }
+
         _bookService.DeleteBook(id);
         return NoContent();
     }
@@ -60,6 +65,24 @@ public class BookController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult UpdateBook(string id, Book book)
     {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            return BadRequest("ID is required");
+        }
+
+        var validator = new BookValidator();
+        var validationResult = validator.Validate(book);
+
+        if (!validationResult.IsValid)
+        {
+            foreach (var validationFailure in validationResult.Errors)
+            {
+                ModelState.AddModelError(validationFailure.PropertyName, validationFailure.ErrorMessage);
+            }
+
+            return BadRequest(book);
+        }
+
         _bookService.UpdateBook(id, book);
         return NoContent();
     }

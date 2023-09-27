@@ -1,5 +1,6 @@
 namespace MvcTask.Enums;
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Genre
 {
     Fantasy,

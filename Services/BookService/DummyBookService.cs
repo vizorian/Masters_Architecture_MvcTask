@@ -2,6 +2,8 @@ namespace MvcTask.Services.BookService;
 
 public class DummyBookService : IBookService
 {
+    private const int ISBN_LENGTH = 10;
+
     private readonly HashSet<Book> _books = new()
     {
         new Book("9780756405892", "9756405890")
@@ -34,7 +36,9 @@ public class DummyBookService : IBookService
 
     public Book? GetBook(string id)
     {
-        return _books.FirstOrDefault(book => book.Id == id);
+        return id.Length == ISBN_LENGTH
+            ? _books.FirstOrDefault(book => book.Isbn == id)
+            : _books.FirstOrDefault(book => book.Isbn13 == id);
     }
 
     public void CreateBook(Book book)
@@ -47,7 +51,7 @@ public class DummyBookService : IBookService
         _books.Add(book);
     }
 
-    public void UpdateBook(string id, Book book)
+    public void UpdateBook(string id, BookDto book)
     {
         var existingBook = GetBook(id);
 

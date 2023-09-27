@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCors();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -13,6 +14,12 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddSingleton<IBookService, DummyBookService>();
 
 var app = builder.Build();
+
+app.UseCors(options => options
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .WithOrigins("https://localhost:5001")
+);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

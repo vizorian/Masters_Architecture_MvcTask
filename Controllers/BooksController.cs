@@ -1,7 +1,7 @@
 namespace MvcTask.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class BooksController : ControllerBase
 {
     private readonly IBookService _bookService;

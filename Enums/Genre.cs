@@ -14,5 +14,14 @@ public enum Genre
     Action,
     Spy,
     Drama,
-    Biography
+    Biography,
+    Autobiography,
+    History,
+    Science,
+    SelfHelp,
+    Travel,
+    Religion,
+    Children,
+    YoungAdult,
+    Other
 }

@@ -4,14 +4,14 @@ namespace MvcTask.Controllers;
 [Route("api/[controller]")]
 public class BooksController : ControllerBase
 {
-    private readonly IBookService _bookService;
+    private readonly IBookRepository _bookRepository;
     private readonly IsbnValidator _isbnValidator = new();
     private readonly BookValidator _bookValidator = new();
     private readonly BookDtoValidator _bookDtoValidator = new();
 
-    public BooksController(IBookService bookService)
+    public BooksController(IBookRepository bookRepository)
     {
-        _bookService = bookService;
+        _bookRepository = bookRepository;
     }
 
     /// <summary>
@@ -19,9 +19,9 @@ public class BooksController : ControllerBase
     /// </summary>
     /// <response code="200">All books.</response>
     [HttpGet]
-    public ActionResult<IEnumerable<Book>> GetBooks()
+    public IActionResult GetBooks()
     {
-        var books = _bookService.GetBooks();
+        var books = _bookRepository.GetBooks();
         return Ok(books);
     }
 
@@ -32,7 +32,7 @@ public class BooksController : ControllerBase
     /// <response code="200">Book with the specified ID.</response>
     /// <response code="404">Book with the specified ID was not found.</response>
     [HttpGet("{id}")]
-    public ActionResult<Book> GetBook(string id)
+    public IActionResult GetBook(string id)
     {
         var isbnValidationResult = _isbnValidator.Validate(id);
 
@@ -46,7 +46,7 @@ public class BooksController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var book = _bookService.GetBook(id);
+        var book = _bookRepository.GetBook(id);
         if (book is null)
         {
             return NotFound();
@@ -62,7 +62,7 @@ public class BooksController : ControllerBase
     /// <response code="201">Book was created.</response>
     /// <response code="400">Parameter validation failed.</response>
     [HttpPost]
-    public ActionResult<Book> CreateBook(Book book)
+    public IActionResult CreateBook(Book book)
     {
         var bookValidationResult = _bookValidator.Validate(book);
 
@@ -76,7 +76,7 @@ public class BooksController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        _bookService.CreateBook(book);
+        _bookRepository.CreateBook(book);
         return Created($"/books/{book.Id}", book);
     }
 
@@ -101,7 +101,7 @@ public class BooksController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        _bookService.DeleteBook(id);
+        _bookRepository.DeleteBook(id);
         return NoContent();
     }
 
@@ -139,7 +139,7 @@ public class BooksController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        _bookService.UpdateBook(id, book);
+        _bookRepository.UpdateBook(id, book);
         return NoContent();
     }
 }

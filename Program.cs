@@ -11,7 +11,13 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
 });
 
-builder.Services.AddSingleton<IBookService, DummyBookService>();
+// Database
+builder.Services.AddDbContext<BookDbContext>(options =>
+{
+    options.UseSqlite(builder.Configuration.GetConnectionString("LibraryDbSQLiteConnection"));
+}, ServiceLifetime.Singleton);
+
+builder.Services.AddSingleton<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 

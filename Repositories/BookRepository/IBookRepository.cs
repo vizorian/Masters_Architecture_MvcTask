@@ -1,6 +1,6 @@
-namespace MvcTask.Services.BookService;
+namespace MvcTask.Repositories.BookRepository;
 
-public interface IBookService
+public interface IBookRepository
 {
     public IEnumerable<Book> GetBooks();
     public Book? GetBook(string id);

@@ -19,6 +19,9 @@ export class Home extends Component {
                 <ul>
                     <li>Top quality book CRUD found under <em>Books</em></li>
                     <li>Link to the Book API Swagger found under <em>Swagger</em></li>
+                    <li>Unit tests via NUnit</li>
+                    <li>Use of an SQLite Database</li>
+                    <li>ORM via Entity Framework</li>
                 </ul>
             </div>
         );

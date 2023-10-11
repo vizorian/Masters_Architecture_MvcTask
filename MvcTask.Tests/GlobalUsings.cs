@@ -1,1 +1,13 @@
+global using System.Data;
+global using FluentAssertions;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using Moq;
+global using Moq.EntityFrameworkCore;
+global using MvcTask.Controllers;
+global using MvcTask.Enums;
+global using MvcTask.Exceptions;
+global using MvcTask.Models.Book;
+global using MvcTask.Persistence;
+global using MvcTask.Repositories.BookRepository;
 global using NUnit.Framework;

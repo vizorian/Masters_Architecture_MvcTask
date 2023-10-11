@@ -69,6 +69,14 @@ export default function CreateBookForm(props: Props) {
             initialValues={DEFAULT_BOOK_FORM_INPUT}
             validationSchema={BookValidationSchema}
             onSubmit={(values, {setSubmitting}) => {
+                if(values.isbn13.length === 0) {
+                    values.isbn13 = null;
+                }
+                
+                if(values.isbn.length === 0) {
+                    values.isbn = null;
+                }
+                
                 setTimeout(() => {
                     props.handleSubmit(values);
                     setSubmitting(false);

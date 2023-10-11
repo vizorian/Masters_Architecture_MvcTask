@@ -17,6 +17,7 @@
         <PackageReference Include="FluentValidation" Version="11.7.1" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
         <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.8"/>
+        <PackageReference Include="NUnit" Version="4.0.0-beta.1" />
         <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
@@ -28,10 +29,30 @@
         <None Remove="$(SpaRoot)**"/>
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**"/>
         <None Include="Enums\Genre.cs" />
+        <Content Remove="MvcTask.Tests\**" />
+        <None Remove="MvcTask.Tests\**" />
 
 
 
 
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Persistance\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="MvcTask.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="MvcTask.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="MvcTask.Tests\obj\MvcTask.Tests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="MvcTask.Tests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="MvcTask.Tests\obj\project.packagespec.json" />
     </ItemGroup>
 
 
